@@ -1,6 +1,6 @@
-package com.github.ceh9.architect.listeners
+package com.github.ceh9.architect.demo.listeners
 
-import com.github.ceh9.architect.services.MyProjectService
+import com.github.ceh9.architect.demo.services.MyProjectService
 import com.intellij.openapi.components.service
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.project.ProjectManagerListener

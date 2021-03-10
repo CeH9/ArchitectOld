@@ -8,12 +8,19 @@
     <depends>com.intellij.modules.platform</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <applicationService serviceImplementation="com.github.ceh9.architect.services.MyApplicationService"/>
-        <projectService serviceImplementation="com.github.ceh9.architect.services.MyProjectService"/>
+        <applicationService serviceImplementation="com.github.ceh9.architect.demo.services.MyApplicationService"/>
+        <projectService serviceImplementation="com.github.ceh9.architect.demo.services.MyProjectService"/>
     </extensions>
 
     <applicationListeners>
-        <listener class="com.github.ceh9.architect.listeners.MyProjectManagerListener"
+        <listener class="com.github.ceh9.architect.demo.listeners.MyProjectManagerListener"
                   topic="com.intellij.openapi.project.ProjectManagerListener"/>
     </applicationListeners>
+    <actions>
+        <action id="StartArchitect" class="com.github.ceh9.architect.EntryPointAction" text="Start Architect"
+                description="Show Architect dialog">
+            <add-to-group group-id="NewGroup" anchor="last"/>
+            <keyboard-shortcut keymap="$default" first-keystroke="ctrl 0"/>
+        </action>
+    </actions>
 </idea-plugin>

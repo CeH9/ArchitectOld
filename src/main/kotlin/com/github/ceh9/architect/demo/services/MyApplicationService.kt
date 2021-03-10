@@ -1,6 +1,6 @@
-package com.github.ceh9.architect.services
+package com.github.ceh9.architect.demo.services
 
-import com.github.ceh9.architect.MyBundle
+import com.github.ceh9.architect.core.i18n.MyBundle
 
 class MyApplicationService {
 

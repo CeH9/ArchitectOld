@@ -2,6 +2,7 @@ import io.gitlab.arturbosch.detekt.Detekt
 import org.jetbrains.changelog.closure
 import org.jetbrains.changelog.markdownToHTML
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.jetbrains.compose.compose
 
 fun properties(key: String) = project.findProperty(key).toString()
 
@@ -18,6 +19,8 @@ plugins {
     id("io.gitlab.arturbosch.detekt") version "1.15.0"
     // ktlint linter - read more: https://github.com/JLLeitschuh/ktlint-gradle
     id("org.jlleitschuh.gradle.ktlint") version "10.0.0"
+    // Jetpack Compose - https://github.com/JetBrains/compose-jb
+    id("org.jetbrains.compose") version "0.4.0-build173"
 }
 
 group = properties("pluginGroup")
@@ -27,9 +30,14 @@ version = properties("pluginVersion")
 repositories {
     mavenCentral()
     jcenter()
+    maven { url = uri("https://maven.pkg.jetbrains.space/public/p/compose/dev") }
 }
 dependencies {
     detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.15.0")
+
+    implementation(kotlin("stdlib"))
+    implementation("org.jetbrains.compose.material:material:")
+    implementation(compose.desktop.currentOs)
 }
 
 // Configure gradle-intellij-plugin plugin.

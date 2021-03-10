@@ -1,4 +1,4 @@
-package com.github.ceh9.architect
+package com.github.ceh9.architect.core.i18n
 
 import com.intellij.AbstractBundle
 import org.jetbrains.annotations.NonNls
