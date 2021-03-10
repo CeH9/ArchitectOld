@@ -1,6 +1,6 @@
-package org.jetbrains.plugins.template.services
+package com.github.ceh9.architect.services
 
-import org.jetbrains.plugins.template.MyBundle
+import com.github.ceh9.architect.MyBundle
 
 class MyApplicationService {
 
