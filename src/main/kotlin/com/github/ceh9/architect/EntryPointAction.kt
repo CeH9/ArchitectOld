@@ -5,7 +5,7 @@ import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 
 class EntryPointAction : AnAction() {
-    override fun actionPerformed(e: AnActionEvent) {
-        HomeDialog(e.project).show()
+    override fun actionPerformed(actionEvent: AnActionEvent) {
+        actionEvent.project?.also { HomeDialog(it, actionEvent).show() }
     }
 }
