@@ -20,7 +20,7 @@ plugins {
     // ktlint linter - read more: https://github.com/JLLeitschuh/ktlint-gradle
     id("org.jlleitschuh.gradle.ktlint") version "10.0.0"
     // Jetpack Compose - https://github.com/JetBrains/compose-jb
-    id("org.jetbrains.compose") version "0.4.0-build173"
+    id("org.jetbrains.compose") version "0.4.0-build178"
 }
 
 group = properties("pluginGroup")
