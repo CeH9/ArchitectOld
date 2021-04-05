@@ -27,10 +27,10 @@ private val LightGreenColorPalette = lightColors(
 @Composable
 fun WidgetTheme(
     darkTheme: Boolean = false,
+    swingColor: SwingColor = SwingColor(),
     content: @Composable() () -> Unit,
 ) {
     val colors = if (darkTheme) DarkGreenColorPalette else LightGreenColorPalette
-    val swingColor = SwingColor()
 
     MaterialTheme(
         colors = colors.copy(
