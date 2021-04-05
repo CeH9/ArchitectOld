@@ -3,25 +3,23 @@ package com.github.ceh9.architect.features.home
 import androidx.compose.desktop.ComposePanel
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
+import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import com.github.ceh9.architect.core.i18n.MyBundle
-import com.github.ceh9.architect.core.utils.ComposeSizeAdjustmentWrapper
-import com.intellij.openapi.project.Project
-import com.intellij.openapi.ui.DialogWrapper
 import com.github.ceh9.architect.core.ui.theme.WidgetTheme
+import com.github.ceh9.architect.core.utils.ComposeSizeAdjustmentWrapper
 import com.intellij.ide.fileTemplates.FileTemplateManager
 import com.intellij.ide.fileTemplates.FileTemplateUtil
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.CommonDataKeys
+import com.intellij.openapi.project.Project
+import com.intellij.openapi.ui.DialogWrapper
 import java.awt.Dimension
 import java.util.*
 import javax.swing.JComponent
@@ -50,11 +48,15 @@ class HomeDialog(
                     panel = this,
                     preferredSize = IntSize(width, height)
                 ) {
-                    val count = remember { mutableStateOf(0) }
+                    var name by remember { mutableStateOf("") }
 
                     WidgetTheme(darkTheme = true) {
                         Surface(modifier = Modifier.fillMaxSize()) {
-                            Counter(count, onRunTemplate = { runTemplate() })
+                            TemplateCreator(
+                                name = name,
+                                onNameChange = { name = it },
+                                onClick = { runTemplate(name) },
+                            )
                         }
                     }
                 }
@@ -62,21 +64,19 @@ class HomeDialog(
         }
     }
 
-    private fun runTemplate() {
+    private fun runTemplate(name: String) {
         val template = FileTemplateManager
             .getInstance(project)
             .getTemplate("MyFileTemplate")
 
-        val fileName = "FooBar"
-
         val properties = Properties()
-        properties.put("NAME", fileName)
+        properties["NAME"] = name
 
         val psiParent = actionEvent.getData(CommonDataKeys.PSI_FILE)!!.parent
 
         FileTemplateUtil.createFromTemplate(
             template,
-            fileName,
+            name,
             properties,
             psiParent!!
         )
@@ -84,16 +84,22 @@ class HomeDialog(
 }
 
 @Composable
-fun Counter(
-    count: MutableState<Int>,
-    onRunTemplate: () -> Unit
+fun TemplateCreator(
+    name: String,
+    onNameChange: (value: String) -> Unit,
+    onClick: () -> Unit
 ) {
     Column(Modifier.fillMaxSize(), Arrangement.spacedBy(5.dp)) {
         Button(
             modifier = Modifier.align(Alignment.CenterHorizontally),
-            onClick = onRunTemplate
+            onClick = onClick
         ) {
-            Text("Run Template")
+            Text("Enter template's arg NAME:")
         }
+        Spacer(Modifier.height(10.dp))
+        OutlinedTextField(
+            value = name,
+            onValueChange = onNameChange
+        )
     }
 }
