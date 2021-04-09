@@ -38,6 +38,16 @@ dependencies {
     implementation(kotlin("stdlib"))
     implementation("org.jetbrains.compose.material:material:")
     implementation(compose.desktop.currentOs)
+
+    val mviKotlinVersion = "2.0.1"
+    implementation("com.arkivanov.mvikotlin:mvikotlin:$mviKotlinVersion")
+    implementation("com.arkivanov.mvikotlin:mvikotlin-main:$mviKotlinVersion")
+    implementation("com.arkivanov.mvikotlin:mvikotlin-extensions-coroutines:$mviKotlinVersion")
+    implementation("com.arkivanov.mvikotlin:rx:$mviKotlinVersion")
+
+    val decomposeVersion = "0.2.1"
+    implementation("com.arkivanov.decompose:decompose:$decomposeVersion")
+    implementation("com.arkivanov.decompose:extensions-compose-jetbrains:$decomposeVersion")
 }
 
 // Configure gradle-intellij-plugin plugin.
@@ -87,33 +97,33 @@ tasks {
         jvmTarget = "1.8"
     }
 
-    patchPluginXml {
-        version(properties("pluginVersion"))
-        sinceBuild(properties("pluginSinceBuild"))
-        untilBuild(properties("pluginUntilBuild"))
-
-        // Extract the <!-- Plugin description --> section from README.md and provide for the plugin's manifest
-        pluginDescription(
-            closure {
-                File("./README.md").readText().lines().run {
-                    val start = "<!-- Plugin description -->"
-                    val end = "<!-- Plugin description end -->"
-
-                    if (!containsAll(listOf(start, end))) {
-                        throw GradleException("Plugin description section not found in README.md:\n$start ... $end")
-                    }
-                    subList(indexOf(start) + 1, indexOf(end))
-                }.joinToString("\n").run { markdownToHTML(this) }
-            }
-        )
-
-        // Get the latest available change notes from the changelog file
-        changeNotes(
-            closure {
-                changelog.getLatest().toHTML()
-            }
-        )
-    }
+//    patchPluginXml {
+//        version(properties("pluginVersion"))
+//        sinceBuild(properties("pluginSinceBuild"))
+//        untilBuild(properties("pluginUntilBuild"))
+//
+//        // Extract the <!-- Plugin description --> section from README.md and provide for the plugin's manifest
+//        pluginDescription(
+//            closure {
+//                File("./README.md").readText().lines().run {
+//                    val start = "<!-- Plugin description -->"
+//                    val end = "<!-- Plugin description end -->"
+//
+//                    if (!containsAll(listOf(start, end))) {
+//                        throw GradleException("Plugin description section not found in README.md:\n$start ... $end")
+//                    }
+//                    subList(indexOf(start) + 1, indexOf(end))
+//                }.joinToString("\n").run { markdownToHTML(this) }
+//            }
+//        )
+//
+//        // Get the latest available change notes from the changelog file
+//        changeNotes(
+//            closure {
+//                changelog.getLatest().toHTML()
+//            }
+//        )
+//    }
 
     runPluginVerifier {
         ideVersions(properties("pluginVerifierIdeVersions"))
