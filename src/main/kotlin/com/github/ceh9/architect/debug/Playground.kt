@@ -1,14 +1,9 @@
 package com.github.ceh9.architect.debug
 
 import androidx.compose.desktop.Window
-import androidx.compose.desktop.WindowEvents
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Surface
-import androidx.compose.material.Text
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.IntSize
 import com.arkivanov.decompose.ComponentContext

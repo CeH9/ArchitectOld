@@ -97,33 +97,33 @@ tasks {
         jvmTarget = "1.8"
     }
 
-//    patchPluginXml {
-//        version(properties("pluginVersion"))
-//        sinceBuild(properties("pluginSinceBuild"))
-//        untilBuild(properties("pluginUntilBuild"))
-//
-//        // Extract the <!-- Plugin description --> section from README.md and provide for the plugin's manifest
-//        pluginDescription(
-//            closure {
-//                File("./README.md").readText().lines().run {
-//                    val start = "<!-- Plugin description -->"
-//                    val end = "<!-- Plugin description end -->"
-//
-//                    if (!containsAll(listOf(start, end))) {
-//                        throw GradleException("Plugin description section not found in README.md:\n$start ... $end")
-//                    }
-//                    subList(indexOf(start) + 1, indexOf(end))
-//                }.joinToString("\n").run { markdownToHTML(this) }
-//            }
-//        )
-//
-//        // Get the latest available change notes from the changelog file
-//        changeNotes(
-//            closure {
-//                changelog.getLatest().toHTML()
-//            }
-//        )
-//    }
+    patchPluginXml {
+        version(properties("pluginVersion"))
+        sinceBuild(properties("pluginSinceBuild"))
+        untilBuild(properties("pluginUntilBuild"))
+
+        // Extract the <!-- Plugin description --> section from README.md and provide for the plugin's manifest
+        pluginDescription(
+            closure {
+                File(projectDir, "README.md").readText().lines().run {
+                    val start = "<!-- Plugin description -->"
+                    val end = "<!-- Plugin description end -->"
+
+                    if (!containsAll(listOf(start, end))) {
+                        throw GradleException("Plugin description section not found in README.md:\n$start ... $end")
+                    }
+                    subList(indexOf(start) + 1, indexOf(end))
+                }.joinToString("\n").run { markdownToHTML(this) }
+            }
+        )
+
+        // Get the latest available change notes from the changelog file
+        changeNotes(
+            closure {
+                changelog.getLatest().toHTML()
+            }
+        )
+    }
 
     runPluginVerifier {
         ideVersions(properties("pluginVerifierIdeVersions"))
