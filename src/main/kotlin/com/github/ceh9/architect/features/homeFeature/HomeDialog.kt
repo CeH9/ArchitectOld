@@ -1,4 +1,4 @@
-package com.github.ceh9.architect.features.home
+package com.github.ceh9.architect.features.homeFeature
 
 import androidx.compose.desktop.ComposePanel
 import androidx.compose.foundation.layout.*

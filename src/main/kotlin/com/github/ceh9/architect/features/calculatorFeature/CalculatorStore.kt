@@ -1,4 +1,4 @@
-package com.github.ceh9.architect.features.calculator.components
+package com.github.ceh9.architect.features.calculatorFeature
 
 import com.arkivanov.mvikotlin.core.store.Store
 

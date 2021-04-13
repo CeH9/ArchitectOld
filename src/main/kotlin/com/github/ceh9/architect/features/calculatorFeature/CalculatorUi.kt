@@ -1,6 +1,5 @@
-package com.github.ceh9.architect.features.calculator.components
+package com.github.ceh9.architect.features.calculatorFeature
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
 import androidx.compose.material.Text
@@ -13,7 +12,7 @@ import androidx.compose.ui.unit.dp
 import com.arkivanov.decompose.extensions.compose.jetbrains.asState
 
 @Composable
-fun CalculatorContent(component: Calculator) {
+fun CalculatorContent(component: CalculatorComponent) {
     val model by component.model.asState()
 
     Column {

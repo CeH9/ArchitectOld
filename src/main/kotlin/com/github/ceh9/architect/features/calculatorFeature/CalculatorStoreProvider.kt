@@ -1,12 +1,10 @@
-package com.github.ceh9.architect.features.calculator.components
+package com.github.ceh9.architect.features.calculatorFeature
 
 import com.arkivanov.mvikotlin.core.store.Reducer
 import com.arkivanov.mvikotlin.core.store.Store
 import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.arkivanov.mvikotlin.extensions.coroutines.SuspendExecutor
-import com.github.ceh9.architect.features.calculator.components.CalculatorStore.Intent
-import com.github.ceh9.architect.features.calculator.components.CalculatorStore.State
-import com.github.ceh9.architect.features.calculator.components.CalculatorStore.Label
+import com.github.ceh9.architect.features.calculatorFeature.CalculatorStore.*
 
 class CalculatorStoreProvider(
     private val storeFactory: StoreFactory,

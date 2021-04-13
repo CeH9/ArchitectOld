@@ -9,10 +9,11 @@ import androidx.compose.ui.unit.IntSize
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.ExperimentalDecomposeApi
 import com.arkivanov.decompose.extensions.compose.jetbrains.rememberRootComponent
+import com.arkivanov.mvikotlin.core.utils.setMainThreadId
 import com.arkivanov.mvikotlin.main.store.DefaultStoreFactory
-import com.github.ceh9.architect.features.root.Root
-import com.github.ceh9.architect.features.root.RootComponent
-import com.github.ceh9.architect.features.root.RootContent
+import com.github.ceh9.architect.features.rootFeature.RootComponent
+import com.github.ceh9.architect.features.rootFeature.RootComponentImpl
+import com.github.ceh9.architect.features.rootFeature.RootContent
 
 /**
  * Playground (sandbox) for testing stuff without launching IDE.
@@ -25,20 +26,19 @@ fun main() = Window(
     undecorated = false,
     centered = false,
 ) {
+    setMainThreadId(Thread.currentThread().id)
     val rootComponent = rememberRootComponent(factory = ::root)
 
     MockWidgetTheme(darkTheme = true) {
-        Surface(
-            Modifier
-                .fillMaxSize()
-        ) {
+        Surface(modifier = Modifier.fillMaxSize()) {
             RootContent(rootComponent)
         }
     }
 }
 
-private fun root(componentContext: ComponentContext): Root =
-    RootComponent(
+private fun root(componentContext: ComponentContext): RootComponent {
+    return RootComponentImpl(
         componentContext = componentContext,
         storeFactory = DefaultStoreFactory,
     )
+}

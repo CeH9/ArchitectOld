@@ -1,8 +1,8 @@
-package com.github.ceh9.architect.features.calculator.components
+package com.github.ceh9.architect.features.calculatorFeature
 
 import com.arkivanov.decompose.value.Value
 
-interface Calculator {
+interface CalculatorComponent {
     val model: Value<Model>
 
     fun onIncrementClicked()
