@@ -1,9 +1,9 @@
 package com.github.ceh9.architect.features.calculatorFeature
 
-import kotlinx.coroutines.flow.StateFlow
+import androidx.compose.runtime.State
 
 interface CalculatorComponent {
-    val model: StateFlow<CalculatorStore.State>
+    val model: State<CalculatorStore.State>
 
     fun onIncrementClicked()
     fun onDecrementClicked()

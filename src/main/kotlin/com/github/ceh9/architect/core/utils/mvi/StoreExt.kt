@@ -1,5 +1,9 @@
 package com.github.ceh9.architect.core.utils.mvi
 
+import androidx.compose.runtime.State
+import androidx.compose.runtime.mutableStateOf
+import com.arkivanov.decompose.lifecycle.DefaultLifecycleCallbacks
+import com.arkivanov.decompose.lifecycle.Lifecycle
 import com.arkivanov.decompose.value.Value
 import com.arkivanov.decompose.value.ValueObserver
 import com.arkivanov.mvikotlin.core.store.Store
@@ -34,4 +38,31 @@ fun <State : Any> Store<*, State, *>.statesAsStateFlow(): StateFlow<State> {
     ))
 
     return stateFlow
+}
+
+fun <T : Any> Store<*, T, *>.asState(lifecycle: Lifecycle): State<T> {
+    val mutableState = mutableStateOf(state)
+
+    lifecycle.subscribe(
+        object : DefaultLifecycleCallbacks {
+            private var disposable: Disposable? = null
+
+            override fun onCreate() {
+                disposable =
+                    states(
+                        observer(
+                            onComplete = { disposable = null },
+                            onNext = { mutableState.value = it }
+                        )
+                    )
+            }
+
+            override fun onDestroy() {
+                disposable?.dispose()
+                disposable = null
+            }
+        }
+    )
+
+    return mutableState
 }

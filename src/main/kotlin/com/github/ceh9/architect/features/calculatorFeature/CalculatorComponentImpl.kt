@@ -2,8 +2,8 @@ package com.github.ceh9.architect.features.calculatorFeature
 
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.mvikotlin.core.store.StoreFactory
+import com.github.ceh9.architect.core.utils.mvi.asState
 import com.github.ceh9.architect.core.utils.mvi.getStore
-import com.github.ceh9.architect.core.utils.mvi.statesAsStateFlow
 import com.github.ceh9.architect.features.calculatorFeature.CalculatorStore.Intent
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
@@ -17,7 +17,7 @@ class CalculatorComponentImpl(
         CalculatorStoreProvider(storeFactory = storeFactory).provide()
     }
 
-    override val model = store.statesAsStateFlow()
+    override val model = store.asState(lifecycle)
 
     override fun onIncrementClicked() {
         store.accept(Intent.Increment)
