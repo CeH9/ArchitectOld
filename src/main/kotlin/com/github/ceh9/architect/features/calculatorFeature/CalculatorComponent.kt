@@ -1,14 +1,10 @@
 package com.github.ceh9.architect.features.calculatorFeature
 
-import com.arkivanov.decompose.value.Value
+import kotlinx.coroutines.flow.StateFlow
 
 interface CalculatorComponent {
-    val model: Value<Model>
+    val model: StateFlow<CalculatorStore.State>
 
     fun onIncrementClicked()
     fun onDecrementClicked()
-
-    data class Model(
-        val count: Int = 0,
-    )
 }
