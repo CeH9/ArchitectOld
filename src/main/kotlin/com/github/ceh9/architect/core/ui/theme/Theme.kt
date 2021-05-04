@@ -8,7 +8,7 @@ import androidx.compose.ui.graphics.Color
 import com.github.ceh9.architect.core.ui.theme.intellij.SwingColor
 
 private val DarkGreenColorPalette = darkColors(
-    primary = green200,
+    primary = blue600,
     primaryVariant = green700,
     secondary = teal200,
     onPrimary = Color.Black,
